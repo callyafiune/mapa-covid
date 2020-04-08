@@ -14,6 +14,7 @@ import { coordenadas } from './enum-coordenadas';
 export class HomeComponent implements OnInit {
 
   map;
+  previousLayer;
   sigla = 'GO';
   estados: any[] = [];
   coordenate1 = -16.6;
@@ -136,7 +137,13 @@ export class HomeComponent implements OnInit {
           layer.on({
             mouseover: highlightFeature,
             mouseout: resetHighlight,
-            click: highlightFeature,
+            click: (e) => {
+              if (self.previousLayer) {
+                resetHighlight(self.previousLayer);
+              }
+              highlightFeature(e);
+              self.previousLayer = e;
+            },
             dblclick: zoomToFeature
           });
         }
