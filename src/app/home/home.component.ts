@@ -136,7 +136,8 @@ export class HomeComponent implements OnInit {
           layer.on({
             mouseover: highlightFeature,
             mouseout: resetHighlight,
-            click: zoomToFeature
+            click: highlightFeature,
+            dblclick: zoomToFeature
           });
         }
       }).addTo(this.map);
